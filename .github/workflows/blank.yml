@@ -1,0 +1,45 @@
+# Updated table data with corrections and filled in empty cells
+table_data_uz_filled = [
+    ["5:50", "Uyg'onish", "Uyg'onish", "Uyg'onish", "Uyg'onish", "Moslashuvchan"],
+    ["Ertalab", "Ingliz tili (IELTS tayyorlov)", "Ingliz tili (3-4 soat)", 
+     "Ingliz tili (3-4 soat)", "Ingliz tili (IELTS tayyorlov)", "Dam olish va filmlar"],
+    ["11:40 - 16:25", "Univer", "Univer", "Univer", "Univer", "Moslashuvchan"],
+    ["12:40 - 13:30", "Univer", "Univer", "Univer", "Univer", "Moslashuvchan"],
+    ["13:30 - 16:25", "Univer", "Univer", "Univer", "Univer", "Moslashuvchan"],
+    ["16:25 - 17:15", "Uyga qaytish", "Uyga qaytish", "Uyga qaytish", "Uyga qaytish", "Moslashuvchan"],
+    ["Kechqurun", "I, M, A", "I, M, A", "I, M, A", "I, M, A", "Dam olish va filmlar"],
+    ["21:00", "GYM (40-60 minut)", "GYM (40-60 minut)", "GYM (40-60 minut)", "GYM (40-60 minut)", "Dam olish va filmlar"],
+    ["23:00", "Uxlash", "Uxlash", "Uxlash", "Uxlash", "Uxlash"],
+]
+
+# Create the PDF with the updated time distribution and filled cells
+pdf = FPDF()
+pdf.add_page()
+
+# Header for the document
+pdf.set_font("Arial", "B", 16)
+pdf.cell(0, 15, "Haftalik Mahsuldorlik Rejasi", ln=True, align="C")
+pdf.ln(10)
+
+# Add table headers with increased cell size
+pdf.set_font("Arial", "B", 12)
+col_widths_filled = [40, 50, 50, 80, 50, 50]  # Wider column widths for readability
+row_height = 15  # Increased row height
+
+for i, header in enumerate(headers_uz_merged_abbrev):
+    pdf.cell(col_widths_filled[i], row_height, header, border=1, align="C")
+pdf.ln()
+
+# Fill in the table with corrected data and adjusted cell size
+pdf.set_font("Arial", "", 12)
+for row in table_data_uz_filled:
+    for i, item in enumerate(row):
+        pdf.cell(col_widths_filled[i], row_height, str(item), border=1)
+    pdf.ln()
+
+# Save the updated PDF
+pdf_output_path_filled = "/mnt/data/Haftalik_Mahsuldorlik_Rejasi_Filled.pdf"
+pdf.output(pdf_output_path_filled)
+
+pdf_output_path_filled
+
